@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> inserting and deleting Rows & columns  </title>
+    <style>
+        /* added style for table header and data */
+        table, th, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Created table id  and added 5 initial rows -->
+<table id="myTable">
+    <tr><td>Row1 Col1</td><td>Row1 Col2</td></tr>
+    <tr><td>Row2 Col1</td><td>Row2 Col2</td></tr>
+    <tr><td>Row3 Col1</td><td>Row3 Col2</td></tr>
+    <tr><td>Row4 Col1</td><td>Row4 Col2</td></tr>
+    <tr><td>Row5 Col1</td><td>Row5 Col2</td></tr>
+</table>
+
+<br>
+
+<!-- created Insert and delete buttons for rows of table  -->
+<button onclick="insertRow()">Insert row</button>
+<button onclick="deleteRow()">delete row</button>
+
+<!-- cretead a message tag to display the message when all the rows would get deleted  -->
+<p id="message">Message:</p>
+
+<script>
+    // let number of rows that are currently added in table 
+    let rowCount = 5;
+
+    // created a function to insert a new row at the end of the table
+    // in this function , updated the row counter by increasing the row by 1 then i added a blank row 
+    // then created two cells with index 0 that will display on left side and cell2 with index 1 will display on right side
+    //then added content for both cells .The first cell gets "Row6 Col1" if rowCount is 6 followed by second cell
+
+    function insertRow() {
+        const table = document.getElementById("myTable");
+        rowCount++;
+        const row = table.insertRow();
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        cell1.innerHTML = "Row" + rowCount + " Col1";   
+        cell2.innerHTML = "Row" + rowCount + " Col2";  
+
+        // this is used for not display any message when a new row is added after deleting all the rows from the table 
+        document.getElementById("message").innerText = "Message:";
+    }
+
+    // Function to delete the first row of the table
+    function deleteRow() {
+        const table = document.getElementById("myTable");
+
+        //table.rows.length gives the total number of rows in the table , this check if the row is exist or not
+
+          if (table.rows.length > 0) {
+            table.deleteRow(0);  // this delete Delete the first row
+            if (table.rows.length === 0) {
+                // here , display the  message if no more rows are left
+                document.getElementById("message").innerText = "Message: No more rows to delete";
+                
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
